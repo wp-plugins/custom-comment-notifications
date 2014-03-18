@@ -49,6 +49,9 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
 
 == Screenshots ==
 1. Settings Page
+2. Available Variables
+3. Example HTML E-mail
+4. Example Plain Text E-mail
 
 == Installation ==
 = Automatic: =
