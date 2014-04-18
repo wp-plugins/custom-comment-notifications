@@ -2,14 +2,14 @@
 /**
  *
  * @package Custom_Comment_Notifications
- * @version 1.0.0
+ * @version 1.0.1
  */
 /*
 Plugin Name: Custom Comment Notifications
 Plugin URI: https://github.com/scweber/custom-comment-notifications
 Description: This plugin allows for the comment e-mail notifications that are sent to the comment moderator as well as the post author to be completely customized.
 Author: Scott Weber
-Version: 1.0.0
+Version: 1.0.1
 Author URI: https://github.com/scweber
 */
 
@@ -28,6 +28,7 @@ Author URI: https://github.com/scweber
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
 // Default Subjects
 define('CCN_DEFAULT_AUTHOR_COMMENT_SUBJECT', '[BLOG_NAME] Comment: P_TITLE');
 define('CCN_DEFAULT_AUTHOR_TRACKBACK_SUBJECT', '[BLOG_NAME] Trackback: P_TITLE');
@@ -143,14 +144,14 @@ function ccn_settings_menu() {
             $saved_template = 'Moderator Pingback';
         } else {
             ?> <div id="message" class="error">
-                <p><strong><?php _e('Error Saving Template Settings') ?> </strong></p>
+                <p><strong><?php sprintf(__('Error Saving Template Settings', 'custom-comment-notifications')); ?> </strong></p>
             </div>
             <?php
         }
         update_option('ccn_email_format', $_POST['ccn_email_format']);
         
         ?><div id="message" class="updated">
-                <p><strong><?php _e($saved_template.' Settings Saved') ?></strong></p>
+                <p><strong><?php sprintf(__('%s Settings Saved', 'custom-comment-notifications'), $saved_template); ?></strong></p>
             </div>
         <?php
     }
@@ -159,27 +160,33 @@ function ccn_settings_menu() {
     $email_format = get_option('ccn_email_format', 'html');
     
     echo '<div class="wrap">';
-        echo '<h2>' . __('Custom Comment Notifications Settings','custom-comment-notifications') . '</h2>';
+        echo '<h2>' . sprintf(__('Custom Comment Notifications Settings', 'custom-comment-notifications')) . '</h2>';
     echo '</div>';
     ?>
     <p>
-        <?php _e('Select the template you wish to customize and then save before selecting the next template.'); ?>
+        <?php sprintf(__('Select the template you wish to customize and then save before selecting the next template.')); ?>
     </p>
 
     <form method="post" id="ccn_save_options">
         <div id='ccn-general-settings-container'>
-            <hr/><h3>General Settings</h3><hr/>
+            <hr/><h3><?php sprintf(__('General Settings', 'custom-comment-notifications')); ?></h3><hr/>
             <table id="ccn-general-settings-table">
-                <tr valign="top" id='ccn-email-format'><td>Format to display e-mail:</td>
+                <tr valign="top" id='ccn-email-format'>
+                    <td><?php sprintf(__('Format to display e-mail:', 'custom-comment-notifications')); ?></td>
                     <td>
-                        <input type="radio" id="ccn-email-format-plaintext" name="ccn_email_format" value="plaintext" <?php echo $email_format == 'plaintext' ? 'checked="checked"' : ''; ?> /><label for="ccn-email-format-plaintext"><?php _e('Plain Text','custom-comment-notifications'); ?></label>
-                        <input type="radio" id="ccn-email-format-html" name="ccn_email_format" value="html" <?php echo $email_format == 'html' ? 'checked="checked"' : ''; ?> /><label for="ccn-email-format-html"><?php _e('HTML','custom-comment-notifications'); ?></label>
+                        <input type="radio" id="ccn-email-format-plaintext" name="ccn_email_format" value="plaintext" <?php echo $email_format == 'plaintext' ? 'checked="checked"' : ''; ?> /><label for="ccn-email-format-plaintext"><?php sprintf(__('Plain Text','custom-comment-notifications')); ?></label>
+                        <input type="radio" id="ccn-email-format-html" name="ccn_email_format" value="html" <?php echo $email_format == 'html' ? 'checked="checked"' : ''; ?> /><label for="ccn-email-format-html"><?php sprintf(__('HTML','custom-comment-notifications')); ?></label>
                     </td>
                 </tr>
-                <tr valign="top" id='ccn-protect-author' style='display:none;'><td>Protect Comment Author Info in Post Author Email:</td>
+                <tr valign="top" id='ccn-recpients'>
+                    <td><?php sprintf(__('List of additional recipients (comma-delimited):', 'custom-comment-notifications')); ?></td>
+                    <td><input type='text' id='ccn-recipient-list' size='90' /></td>
+                </tr>
+                <tr valign="top" id='ccn-protect-author' style='display:none;'>
+                    <td><?php sprintf(__('Protect Comment Author Info in Post Author Email:', 'custom-comment-notifications')); ?></td>
                     <td>
-                        <input type="radio" id="protect-author-info-true" name="ccn_protect_comment_author" value="1" <?php echo $protect_comment_author == 1 ? 'checked="checked"' : ''; ?> /><label for="protect-author-info-true"><?php _e('Yes','custom-comment-notifications'); ?></label>
-                        <input type="radio" id="protect-author-info-false" name="ccn_protect_comment_author" value="0" <?php echo $protect_comment_author == 0 ? 'checked="checked"' : ''; ?> /><label for="protect-author-info-false"><?php _e('No','custom-comment-notifications'); ?></label>
+                        <input type="radio" id="protect-author-info-true" name="ccn_protect_comment_author" value="1" <?php echo $protect_comment_author == 1 ? 'checked="checked"' : ''; ?> /><label for="protect-author-info-true"><?php sprintf(__('Yes','custom-comment-notifications')); ?></label>
+                        <input type="radio" id="protect-author-info-false" name="ccn_protect_comment_author" value="0" <?php echo $protect_comment_author == 0 ? 'checked="checked"' : ''; ?> /><label for="protect-author-info-false"><?php sprintf(__('No','custom-comment-notifications')); ?></label>
                     </td>
                 </tr>
             </table>
@@ -189,68 +196,68 @@ function ccn_settings_menu() {
                 <tr valign="top">
                     <td>
                         <select name="ccn_template" id="ccn-template">
-                            <option value="" select="selected" ><?php _e('-- Select Template --','custom-comment-notifications'); ?></option>
-                            <option value="author_comment"><?php _e('Author Comment','custom-comment-notifications'); ?></option>
-                            <option value="author_trackback"><?php _e('Author Trackback','custom-comment-notifications'); ?></option>
-                            <option value="author_pingback"><?php _e('Author Pingback','custom-comment-notifications'); ?></option>
-                            <option value="moderator_comment"><?php _e('Moderator Comment','custom-comment-notifications'); ?></option>
-                            <option value="moderator_trackback"><?php _e('Moderator Trackback','custom-comment-notifications'); ?></option>
-                            <option value="moderator_pingback"><?php _e('Moderator Pingback','custom-comment-notifications'); ?></option>
+                            <option value="" select="selected" ><?php sprintf(__('-- Select Template --', 'custom-comment-notifications')); ?></option>
+                            <option value="author_comment"><?php sprintf(__('Author Comment', 'custom-comment-notifications')); ?></option>
+                            <option value="author_trackback"><?php sprintf(__('Author Trackback', 'custom-comment-notifications')); ?></option>
+                            <option value="author_pingback"><?php sprintf(__('Author Pingback', 'custom-comment-notifications')); ?></option>
+                            <option value="moderator_comment"><?php sprintf(__('Moderator Comment', 'custom-comment-notifications')); ?></option>
+                            <option value="moderator_trackback"><?php sprintf(__('Moderator Trackback', 'custom-comment-notifications')); ?></option>
+                            <option value="moderator_pingback"><?php sprintf(__('Moderator Pingback', 'custom-comment-notifications')); ?></option>
                         </select>
                     </td>
-                    <td id="ccn-template-warning"><span>**Switching the selection without saving will result in losing unsaved changes.</span></td>
+                    <td id="ccn-template-warning"><span><?php sprintf(__('**Switching the selection without saving will result in losing unsaved changes.', 'custom-comment-notifications')); ?></span></td>
                 </tr>
             </table>
         </div>
         <div id="ccn-editor-container">
             <table id="ccn-editor-table">
-                <tr valign="top"><th>Subject:</th><td><input type="text" id="ccn-editor-subject" size="90"></input></td></tr>
-                <tr valign="top"><th>Content:</th><td><textarea rows="20" cols="90" id="ccn-editor-content"></textarea></td></tr>
+                <tr valign="top"><th><?php sprintf(__('Subject:', 'custom-comment-notifications')); ?></th><td><input type="text" id="ccn-editor-subject" size="90"></input></td></tr>
+                <tr valign="top"><th><?php sprintf(__('Content:', 'custom-comment-notifications')); ?></th><td><textarea rows="20" cols="90" id="ccn-editor-content"></textarea></td></tr>
             </table>
         </div>
         <div id="ccn-save-container">
             <table id="ccn-save-table">
-                <tr valign="top"><td><input type="submit" name="ccn_save" class="button-primary" value="<?php _e('Save Changes','custom-comment-notifications'); ?>" /></td></tr>
+                <tr valign="top"><td><input type="submit" name="ccn_save" class="button-primary" value="<?php sprintf(__('Save Changes','custom-comment-notifications')); ?>" /></td></tr>
             </table>     
         </div>
     </form>
     <div id="ccn-variables-container">
-        <hr/><h3>Post Variables</h3><hr/>
+        <hr/><h3><?php sprintf(__('Post Variables', 'custom-comment-notifications')); ?></h3><hr/>
         <table id="ccn-post-variables-table" class="form-table">
-            <thead><tr><th>Variable</th><th>Description</th><th>Type</th></tr></thead>
-            <tr><td id="ccn-variable">P_ID</td><td id="ccn-variable-description">ID of post that was commented on</td><td id="ccn-variable-type">Text</td></tr>
-            <tr><td id="ccn-variable">P_TITLE</td><td id="ccn-variable-description">Title of post that was commented on</td><td id="ccn-variable-type">Text</td></tr>
-            <tr><td id="ccn-variable">P_LINK</td><td id="ccn-variable-description">Link to post that was commented on</td><td id="ccn-variable-type">Anchor</td></tr>
-            <tr><td id="ccn-variable">P_LINK_COMMENT</td><td id="ccn-variable-description">Link to post that was commented on (navigate to current comment)</td><td id="ccn-variable-type">Anchor</td></tr>
-            <tr><td id="ccn-variable">P_LINK_COMMENTS</td><td id="ccn-variable-description">Link to the post that was commented on (navigate to comments section)</td><td id="ccn-variable-type">Anchor</td></tr>
+            <thead><tr><th><?php sprintf(__('Variable', 'custom-comment-notifications')); ?></th><th><?php sprintf(__('Description', 'custom-comment-notifications')); ?></th><th><?php sprintf(__('Type', 'custom-comment-notifications')); ?></th></tr></thead>
+            <tr><td id="ccn-variable"><?php sprintf(__('P_ID', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('ID of post that was commented on', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Text', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('P_TITLE', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Title of post that was commented on', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Text', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('P_LINK', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Link to post that was commented on', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('P_LINK_COMMENT', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Link to post that was commented on (navigate to current comment)', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('P_LINK_COMMENTS', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Link to the post that was commented on (navigate to comments section)', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
         </table>
-        <hr/><h3>Comment Variables</h3><hr/>
+        <hr/><h3><?php sprintf(__('Comment Variables', 'custom-comment-notifications')); ?></h3><hr/>
         <table id="ccn-comment-variables-table" class="form-table">
-            <thead><tr><th>Variable</th><th>Description</th><th>Type</th></tr></thead>
-            <tr><td id="ccn-variable">C_AUTHOR</td><td id="ccn-variable-description">Name of comment author</td><td id="ccn-variable-type">Text</td></tr>
-            <tr><td id="ccn-variable">C_AUTHOR_EMAIL</td><td id="ccn-variable-description">Email of comment author</td><td id="ccn-variable-type">Mail Link</td></tr>
-            <tr><td id="ccn-variable">C_AUTHOR_IP</td><td id="ccn-variable-description">IP of comment author</td><td id="ccn-variable-type">Text</td></tr>
-            <tr><td id="ccn-variable">C_AUTHOR_DOMAIN</td><td id="ccn-variable-description">Domain lookup of comment author's IP</td><td id="ccn-variable-type">Anchor</td></tr>
-            <tr><td id="ccn-variable">C_AUTHOR_URL</td><td id="ccn-variable-description">URL of comment author</td><td id="ccn-variable-type">Anchor</td></tr>
-            <tr><td id="ccn-variable">C_AUTHOR_ARIN_LOOKUP</td><td id="ccn-variable-description"><a href="https://www.arin.net/">ARIN Whois</a> lookup of comment author's IP</td><td id="ccn-variable-type">Anchor</td></tr>
-            <tr><td id="ccn-variable">C_CONTENT</td><td id="ccn-variable-description">Content of the comment</td><td id="ccn-variable-type">Text</td></tr>
-            <tr><td id="ccn-variable">C_WAITING_MODERATION</td><td id="ccn-variable-description">Number of comments waiting moderation (only valid on Moderator Template)</td><td id="ccn-variable-type">Integer</td></tr>
+            <thead><tr><th><?php sprintf(__('Variable', 'custom-comment-notifications')); ?></th><th><?php sprintf(__('Description', 'custom-comment-notifications')); ?></th><th><?php sprintf(__('Type', 'custom-comment-notifications')); ?></th></tr></thead>
+            <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Name of comment author', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Text', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_EMAIL', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Email of comment author', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Mail Link', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_IP', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('IP of comment author', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Text', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_DOMAIN', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Domain lookup of comment author\'s IP', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type">Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_URL', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('URL of comment author', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_ARIN_LOOKUP', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><a href="https://www.arin.net/"><?php sprintf(__('ARIN Whois', 'custom-comment-notifications')); ?></a><?php sprintf(__(' lookup of comment author\'s IP', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('C_CONTENT', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Content of the comment', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Text', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('C_WAITING_MODERATION', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Number of comments waiting moderation (only valid on Moderator Template)', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Integer', 'custom-comment-notifications')); ?></td></tr>
         </table>
-        <hr/><h3>Moderation Variables</h3><hr/>
+        <hr/><h3><?php sprintf(__('Moderation Variables', 'custom-comment-notifications')); ?></h3><hr/>
         <table id="ccn-moderation-variables-table" class="form-table">
-            <thead><tr><th>Variable</th><th>Description</th><th>Type</th></tr></thead>
-            <tr><td id="ccn-variable">DELETE_TRASH_COMMENT_LINK</td><td id="ccn-variable-description">Link to trash or delete Comment (depends on <a href=https://codex.wordpress.org/Trash_status>EMPTY_TRASH_DAYS</a> variable)</td><td id="ccn-variable-type">Anchor</td></tr>
-            <tr><td id="ccn-variable">APPROVE_COMMENT_LINK</td><td id="ccn-variable-description">Link to approve comment (only valid on Moderator Template)</td><td id="ccn-variable-type">Anchor</td></tr>
-            <tr><td id="ccn-variable">SPAM_COMMENT_LINK</td><td id="ccn-variable-description">Link to mark comment as spam</td><td id="ccn-variable-type">Anchor</td></tr>
-            <tr><td id="ccn-variable">MODERATION_PANEL</td><td id="ccn-variable-description">Link to Moderation Panel (only valid on Moderator Template)</td><td id="ccn-variable-type">Anchor</td></tr>
+            <thead><tr><th><?php sprintf(__('Variable', 'custom-comment-notifications')); ?></th><th><?php sprintf(__('Description', 'custom-comment-notifications')); ?></th><th><?php sprintf(__('Type', 'custom-comment-notifications')); ?></th></tr></thead>
+            <tr><td id="ccn-variable"><?php sprintf(__('DELETE_TRASH_COMMENT_LINK', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Link to trash or delete Comment (depends on ', 'custom-comment-notifications')); ?><a href=https://codex.wordpress.org/Trash_status><?php sprintf(__('EMPTY_TRASH_DAYS', 'custom-comment-notifications')); ?></a><?php sprintf(__(' variable)', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('APPROVE_COMMENT_LINK', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Link to approve comment (only valid on Moderator Template)', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('SPAM_COMMENT_LINK', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Link to mark comment as spam', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('MODERATION_PANEL', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Link to Moderation Panel (only valid on Moderator Template)', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
         </table>
-        <hr/><h3>Site Variables</h3><hr/>
+        <hr/><h3><?php sprintf(__('Site Variables', 'custom-comment-notifications')); ?></h3><hr/>
         <table id="ccn-moderation-variables-table" class="form-table">
-            <thead><tr><th>Variable</th><th>Description</th><th>Type</th></tr></thead>
-            <tr><td id="ccn-variable">SITE_LINK</td><td id="ccn-variable-description">Link to Site</td><td id="ccn-variable-type">Anchor</td></tr>
-            <tr><td id="ccn-variable">BLOG_NAME</td><td id="ccn-variable-description">Blog Name</td><td id="ccn-variable-type">Text</td></tr>
+            <thead><tr><th><?php sprintf(__('Variable', 'custom-comment-notifications')); ?></th><th><?php sprintf(__('Description', 'custom-comment-notifications')); ?></th><th><?php sprintf(__('Type', 'custom-comment-notifications')); ?></th></tr></thead>
+            <tr><td id="ccn-variable"><?php sprintf(__('SITE_LINK', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Link to Site', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('BLOG_NAME', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Blog Name', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Text', 'custom-comment-notifications')); ?></td></tr>
         </table>
-        <span>**If Plain Text Email format selection is chosen, then anchor tags will be split out and the URL will immediately follow the corresponding text.</span>
+        <span><?php sprintf(__('**If Plain Text Email format selection is chosen, then anchor tags will be split out and the URL will immediately follow the corresponding text.', 'custom-comment-notifications')); ?></span>
     </div>
     
 <?php
@@ -419,6 +426,7 @@ function ccn_javascript() { ?>
                 
                 $("#ccn-editor-content").attr("name", "ccn_"+template);
                 $("#ccn-editor-subject").attr("name", "ccn_"+template+"_subject");
+                $("#ccn-recipient-list").attr("name", "ccn_"+template+"_list");
             });
         });
     </script>
@@ -815,7 +823,7 @@ if(!function_exists('wp_notify_moderator')) :
         $subject = preg_replace("/\bAPPROVE_COMMENT_LINK\b/u", $APPROVE_COMMENT_LINK, $subject);
         $subject = preg_replace("/\bMODERATION_PANEL\b/u", $MODERATION_PANEL, $subject);
         $subject = preg_replace("/\bSITE_LINK\b/u", $SITE_LINK, $subject);
-        $subject = preg_replace("/\bBLOG_NAME\b/u", $BLOG_NAME, $subject); 
+        $subject = preg_replace("/\bBLOG_NAME\b/u", $BLOG_NAME, $subject);
         
         $sender = 'webmaster@'.preg_replace('#^www.#', '', strtolower($_SERVER['SERVER_NAME']));
         if ($comment->comment_author_email != '') {
