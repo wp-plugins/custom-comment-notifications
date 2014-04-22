@@ -2,8 +2,8 @@
 Contributors: scweber
 Tags: comment, notifications, author, moderator, e-mail
 Requires at least: 3.0
-Tested up to: 3.9
-Stable tag: 1.0.0
+Tested up to: 3.8.1
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,5 +72,9 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
 3. Set up and customize the plugin through the 'Settings' Menu
 
 == Changelog ==
+= 1.0.1 =
+* **Bug Fixes**
+  * Post Author must have 'moderate_comments' capability in order to trash or spam comments.
+
 = 1.0 =
 * This is the first release.

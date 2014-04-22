@@ -572,7 +572,7 @@ if(!function_exists('wp_notify_postauthor')) :
             }
         }    
         
-        if (!user_can($post->post_author, 'edit_comment', $comment_id)) { // Reset the Moderation Settings if post author can't moderate
+        if (!user_can($post->post_author, 'moderate_comments', $comment_id)) { // Reset the Moderation Settings if post author can't moderate
             $DELETE_TRASH_COMMENT_LINK = '';
             $SPAM_COMMENT_LINK = '';
         }        
@@ -624,12 +624,12 @@ if(!function_exists('wp_notify_postauthor')) :
         $sender = 'webmaster@'.preg_replace('#^www.#', '', strtolower($_SERVER['SERVER_NAME']));        
         if ($comment->comment_author == '' || $protect_comment_author == 1) {
             $from = "From: \"$BLOG_NAME\" <$sender>";
-	} else if ($protect_comment_author == 0) {
+    	} else if ($protect_comment_author == 0) {
             $from = "From: \"$comment->comment_author\" <$sender>";
             if ($comment->comment_author_email != '') {
                 $reply_to = "Reply-To: \"$comment->comment_author_email\" <$comment->comment_author_email>";
             }
-	} else {
+        } else {
             $from = "From: \"$BLOG_NAME\" <$sender>";
         }
         
@@ -769,7 +769,7 @@ if(!function_exists('wp_notify_moderator')) :
             }
         }    
         
-        if (!user_can($post->post_author, 'edit_comment', $comment_id)) { // Reset the Moderation Settings if post author can't moderate
+        if (!user_can($post->post_author, 'moderate_comments', $comment_id)) { // Reset the Moderation Settings if post author can't moderate
             $APPROVE_COMMENT_LINK = '';
             $DELETE_TRASH_COMMENT_LINK = '';
             $SPAM_COMMENT_LINK = '';
@@ -831,12 +831,12 @@ if(!function_exists('wp_notify_moderator')) :
             if ($comment->comment_author_email != '') {
                 $reply_to = "Reply-To: $comment->comment_author_email";
             }
-	} else {
+        } else {
             $from = "From: \"$comment->comment_author\" <$wp_email>";
             if ($comment->comment_author_email != '') {
                 $reply_to = "Reply-To: \"$comment->comment_author_email\" <$comment->comment_author_email>"; 
             }
-	}
+        }
         
          $message_headers = array(
             'MIME-Version: 1.0',
