@@ -2,14 +2,14 @@
 /**
  *
  * @package Custom_Comment_Notifications
- * @version 1.0.1
+ * @version 1.0.2
  */
 /*
 Plugin Name: Custom Comment Notifications
 Plugin URI: https://github.com/scweber/custom-comment-notifications
 Description: This plugin allows for the comment e-mail notifications that are sent to the comment moderator as well as the post author to be completely customized.
 Author: Scott Weber
-Version: 1.0.1
+Version: 1.0.2
 Author URI: https://github.com/scweber
 */
 
@@ -151,8 +151,8 @@ function ccn_settings_menu() {
         update_option('ccn_email_format', $_POST['ccn_email_format']);
         
         ?><div id="message" class="updated">
-                <p><strong><?php sprintf(__('%s Settings Saved', 'custom-comment-notifications'), $saved_template); ?></strong></p>
-            </div>
+            <p><strong><?php sprintf(__('%s Settings Saved', 'custom-comment-notifications'), $saved_template); ?></strong></p>
+        </div>
         <?php
     }
 
@@ -237,7 +237,7 @@ function ccn_settings_menu() {
             <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Name of comment author', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Text', 'custom-comment-notifications')); ?></td></tr>
             <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_EMAIL', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Email of comment author', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Mail Link', 'custom-comment-notifications')); ?></td></tr>
             <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_IP', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('IP of comment author', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Text', 'custom-comment-notifications')); ?></td></tr>
-            <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_DOMAIN', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Domain lookup of comment author\'s IP', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type">Anchor', 'custom-comment-notifications')); ?></td></tr>
+            <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_DOMAIN', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Domain lookup of comment author\'s IP', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
             <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_URL', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('URL of comment author', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
             <tr><td id="ccn-variable"><?php sprintf(__('C_AUTHOR_ARIN_LOOKUP', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><a href="https://www.arin.net/"><?php sprintf(__('ARIN Whois', 'custom-comment-notifications')); ?></a><?php sprintf(__(' lookup of comment author\'s IP', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Anchor', 'custom-comment-notifications')); ?></td></tr>
             <tr><td id="ccn-variable"><?php sprintf(__('C_CONTENT', 'custom-comment-notifications')); ?></td><td id="ccn-variable-description"><?php sprintf(__('Content of the comment', 'custom-comment-notifications')); ?></td><td id="ccn-variable-type"><?php sprintf(__('Text', 'custom-comment-notifications')); ?></td></tr>
@@ -331,11 +331,11 @@ function ccn_destroy($blog_id) {
 // Deactivation Hook
 function ccn_uninstall() {
     if(function_exists( 'is_multisite' ) && is_multisite()) {
-     global $wpdb; 
-     $blogList = $wpdb->get_results("SELECT blog_id, domain, path FROM ".$wpdb->blogs);
-     foreach($blogList as $blog) {
-         ccn_destroy($blog->blog_id);
-     }
+        global $wpdb; 
+        $blogList = $wpdb->get_results("SELECT blog_id, domain, path FROM ".$wpdb->blogs);
+        foreach($blogList as $blog) {
+            ccn_destroy($blog->blog_id);
+        }
     } else {
         ccn_destroy(NULL);
     }
