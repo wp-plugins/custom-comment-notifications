@@ -3,7 +3,7 @@ Contributors: scweber
 Tags: comment, notifications, author, moderator, e-mail
 Requires at least: 3.0
 Tested up to: 3.8.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,10 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
 3. Set up and customize the plugin through the 'Settings' Menu
 
 == Changelog ==
+= 1.0.4 =
+* **Enhancments**
+  * Allow Post Author to be excluded from or included in moderation e-mails.
+
 = 1.0.3 =
 * **Bug Fixes**
   * A bug with the localization caused all the text to break in the Settings Menu.

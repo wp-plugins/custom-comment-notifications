@@ -2,14 +2,14 @@
 /**
  *
  * @package Custom_Comment_Notifications
- * @version 1.0.3
+ * @version 1.0.4
  */
 /*
 Plugin Name: Custom Comment Notifications
 Plugin URI: https://github.com/scweber/custom-comment-notifications
 Description: This plugin allows for the comment e-mail notifications that are sent to the comment moderator as well as the post author to be completely customized.
 Author: Scott Weber
-Version: 1.0.3
+Version: 1.0.4
 Author URI: https://github.com/scweber
 */
 
@@ -133,14 +133,17 @@ function ccn_settings_menu() {
         } else if (isset($_POST['ccn_moderator_comment_subject']) && isset($_POST['ccn_moderator_comment'])) {
             update_option('ccn_moderator_comment_subject', stripslashes(sanitize_text_field($_POST['ccn_moderator_comment_subject'])));
             update_option('ccn_moderator_comment', stripslashes(wp_kses_post($_POST['ccn_moderator_comment'])));
+	    update_option('ccn_allow_author_moderation', $_POST['ccn_allow_author_moderation']);
             $saved_template = 'Moderator Comment';
         } else if (isset($_POST['ccn_moderator_trackback_subject']) && isset($_POST['ccn_moderator_trackback'])) {
             update_option('ccn_moderator_trackback_subject', stripslashes(sanitize_text_field($_POST['ccn_moderator_trackback_subject'])));
             update_option('ccn_moderator_trackback', stripslashes(wp_kses_post($_POST['ccn_moderator_trackback'])));
+	    update_option('ccn_allow_author_moderation', $_POST['ccn_allow_author_moderation']);
             $saved_template = 'Moderator Trackback';
         } else if (isset($_POST['ccn_moderator_pingback_subject']) && isset($_POST['ccn_moderator_pingback'])) {
             update_option('ccn_moderator_pingback_subject', stripslashes(sanitize_text_field($_POST['ccn_moderator_pingback_subject'])));
             update_option('ccn_moderator_pingback', stripslashes(wp_kses_post($_POST['ccn_moderator_pingback'])));
+	    update_option('ccn_allow_author_moderation', $_POST['ccn_allow_author_moderation']);
             $saved_template = 'Moderator Pingback';
         } else {
             ?> <div id="message" class="error">
@@ -149,7 +152,6 @@ function ccn_settings_menu() {
             <?php
         }
         update_option('ccn_email_format', $_POST['ccn_email_format']);
-        
         ?>
         <div id="message" class="updated">
             <p><strong><?php _e($saved_template."'s Settings Saved", 'custom-comment-notifications'); ?></strong></p>
@@ -159,6 +161,7 @@ function ccn_settings_menu() {
 
     $protect_comment_author = get_option('ccn_protect_comment_author', 0);
     $email_format = get_option('ccn_email_format', 'html');
+    $allow_author_moderation = get_option('ccn_allow_author_moderation', 1);
     ?>
     <div class="wrap">
         <h2><?php _e('Custom Comment Notifications Settings', 'custom-comment-notifications'); ?></h2>
@@ -185,12 +188,21 @@ function ccn_settings_menu() {
                         <input type="radio" id="protect-author-info-false" name="ccn_protect_comment_author" value="0" <?php echo $protect_comment_author == 0 ? 'checked="checked"' : ''; ?> /><label for="protect-author-info-false"><?php _e('No','custom-comment-notifications'); ?></label>
                     </td>
                 </tr>
+		<tr valign="top" id='ccn-allow-author-moderation' style='display:none;'>
+                    <td><?php _e('Include Author in Moderation E-mails (Author must have moderation rights):', 'custom-comment-notifications'); ?></td>
+                    <td>
+                        <input type="radio" id="allow-author-moderation-true" name="ccn_allow_author_moderation" value="1" <?php echo $allow_author_moderation== 1 ? 'checked="checked"' : ''; ?> /><label for="allow-author-moderation-true"><?php _e('Yes','custom-comment-notifications'); ?></label>
+                        <input type="radio" id="allow-author-moderation-false" name="ccn_allow_author_moderation" value="0" <?php echo $allow_author_moderation == 0 ? 'checked="checked"' : ''; ?> /><label for="allow-author-moderation-false"><?php _e('No','custom-comment-notifications'); ?></label>
+                    </td>
+                </tr>
             </table>
         </div>
         <div id="ccn-template-selector">
+            <hr/><h3><?php _e('Template Specific Settings', 'custom-comment-notifications'); ?></h3><hr/>
             <table id="ccn-template-table">       
                 <tr valign="top">
-                    <td>
+                    <th><?php _e('Template: ', 'custom-comment-notifications'); ?></th>
+		    <td>
                         <select name="ccn_template" id="ccn-template">
                             <option value="" select="selected" ><?php _e('-- Select Template --', 'custom-comment-notifications'); ?></option>
                             <option value="author_comment"><?php _e('Author Comment', 'custom-comment-notifications'); ?></option>
@@ -206,7 +218,7 @@ function ccn_settings_menu() {
             </table>
         </div>
         <div id="ccn-editor-container">
-            <table id="ccn-editor-table">
+	    <table id="ccn-editor-table">
                 <tr valign="top"><th><?php _e('Subject:', 'custom-comment-notifications'); ?></th><td><input type="text" id="ccn-editor-subject" size="90"></input></td></tr>
                 <tr valign="top"><th><?php _e('Content:', 'custom-comment-notifications'); ?></th><td><textarea rows="20" cols="90" id="ccn-editor-content"></textarea></td></tr>
             </table>
@@ -285,6 +297,7 @@ function ccn_setup($blog_id) {
     update_option('ccn_moderator_pingback', CCN_DEFAULT_MODERATOR_PINGBACK);
     update_option('ccn_protect_comment_author', 0);
     update_option('ccn_email_format', 'html');
+    update_option('ccn_allow_author_moderation', 1);
 }
 
 // Activation Hook
@@ -322,6 +335,7 @@ function ccn_destroy($blog_id) {
     delete_option('ccn_moderator_pingback');
     delete_option('ccn_protect_comment_author');
     delete_option('ccn_email_format');
+    delete_option('ccn_allow_author_moderation');
 }
 
 // Deactivation Hook
@@ -662,6 +676,7 @@ if(!function_exists('wp_notify_moderator')) :
         
         $protect_comment_author = get_option('ccn_protect_comment_author', 0);
         $email_format = get_option('ccn_email_format', 'html');
+	$allow_author_moderation = get_option('ccn_allow_author_moderation', 1);
         if($email_format === 'html') {
             $moderator_comment_subject = nl2br(get_option('ccn_moderator_comment_subject', CCN_DEFAULT_MODERATOR_COMMENT_SUBJECT));
             $moderator_comment = nl2br(get_option('ccn_moderator_comment', CCN_DEFAULT_MODERATOR_COMMENT));
@@ -688,7 +703,7 @@ if(!function_exists('wp_notify_moderator')) :
         
         // Send to the administration and to the post author if the author can modify the comment.
         $recipients = array(get_option('admin_email'));        
-        if(user_can($postAuthor->ID, 'edit_comment', $comment_id) && !empty($postAuthor->user_email)) {
+        if($allow_author_moderation && user_can($postAuthor->ID, 'edit_comment', $comment_id) && !empty($postAuthor->user_email)) {
             if(0 !== strcasecmp($postAuthor->user_email, get_option('admin_email'))) {
                 $recipients[] = $postAuthor->user_email;
             }
