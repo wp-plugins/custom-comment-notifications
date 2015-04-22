@@ -22,6 +22,7 @@ for you moderators.
   * Post Link
   * Post Link to Specific Comment
   * Post Link to Comments Section
+  * Post Category (only the first category assigned to post)
 
 * **Comment Variables**
   * Comment Author Name
@@ -31,6 +32,7 @@ for you moderators.
   * Comment Author URL
   * Comment Author ARIN Lookup
   * Comment Content
+  * Comment Excerpt
   * Comments Awaiting Moderation (Moderator Templates Only)
 
 * **Moderation Variables**
