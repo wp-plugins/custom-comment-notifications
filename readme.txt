@@ -2,8 +2,8 @@
 Contributors: scweber
 Tags: comment, notifications, author, moderator, e-mail
 Requires at least: 3.0
-Tested up to: 3.8.1
-Stable tag: 1.0.4
+Tested up to: 4.1.2
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,7 +64,7 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
 1. Search for 'custom comment notifications' through the New Plugin Menu
 2. Install the plugin
 3. Activate either on a Network Level or on a Single Site Level
-4. Note that a netowrk activation will activate on the sub-sites with individual template/settings options
+4. Note that a network activation will activate on the sub-sites with individual template/settings options
 
 = Manual/FTP: =
 1. Upload `custom-comment-notifications` directory to the `/wp-content/plugins/` directory
@@ -72,6 +72,13 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
 3. Set up and customize the plugin through the 'Settings' Menu
 
 == Changelog ==
+= 1.0.5 =
+* **Enhancements**
+  * Category variable added that will show the first category assigned to a post.
+  * Comment Excerpt variable added that will allow for the comment excerpt to be included in the email.
+  * Ability to specify additional recipients that will receive the e-mails in conjunction to the Site Administrator and Author.
+  * Ability to protect the comment author's information in the moderation email. This functionality already existed for the author email.
+
 = 1.0.4 =
 * **Enhancments**
   * Allow Post Author to be excluded from or included in moderation e-mails.

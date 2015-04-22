@@ -13,6 +13,8 @@
 #ccn-editor-container th { font-size: 120%; text-align: left; padding-top: 5px; }
 #ccn-template-warning { padding-left: 15px; vertical-align: middle; }
 #ccn-save-container { padding: 25px 0; }
+.ccn-information { font-size: 80%; font-style: italic; }
+#ccn-email-recipients { display: none; }
 
 /* Variables Tables Styles */
 #ccn-variables-container h3 { margin: 5px 0 0 0; }
