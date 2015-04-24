@@ -2,14 +2,14 @@
 /**
  *
  * @package Custom_Comment_Notifications
- * @version 1.0.5
+ * @version 1.0.6
  */
 /*
   Plugin Name: Custom Comment Notifications
   Plugin URI: https://github.com/scweber/custom-comment-notifications
   Description: This plugin allows for the comment e-mail notifications that are sent to the comment moderator as well as the post author to be completely customized.
   Author: Scott Weber
-  Version: 1.0.5
+  Version: 1.0.6
   Author URI: https://github.com/scweber
  */
 
@@ -246,6 +246,7 @@ function ccn_settings_menu() {
                         <table id="ccn-post-variables-table" class="form-table">
                             <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
                             <tr><td id="ccn-variable"><?php _e('P_ID', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('ID of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                            <tr><td id="ccn-variable"><?php _e('P_AUTHOR', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Author of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('P_TITLE', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Title of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('P_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('P_LINK_COMMENT', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to post that was commented on (navigate to current comment)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
@@ -557,6 +558,7 @@ if(!function_exists('wp_notify_postauthor')) :
         // Get the Post Variables
         $P_ID = $comment->comment_post_ID;
         $P_TITLE = $post->post_title;
+        $P_AUTHOR = $postAuthor->display_name;
         if($email_format === 'html') {
             $P_LINK = '<a href="'.get_permalink($P_ID).'">'.$P_TITLE.'</a>';
             $P_LINK_COMMENT = '<a href="'.get_permalink($P_ID).'#comment-'.$comment_id.'">'.$P_TITLE.'</a>';
@@ -632,6 +634,7 @@ if(!function_exists('wp_notify_postauthor')) :
 
         //REPLACE VARIABLES
         $notify_message = preg_replace("/\bP_ID\b/u", $P_ID, $notify_message);
+        $notify_message = preg_replace("/\bP_AUTHOR\b/u", $P_AUTHOR, $notify_message);
         $notify_message = preg_replace("/\bP_TITLE\b/u", $P_TITLE, $notify_message);
         $notify_message = preg_replace("/\bP_LINK\b/u", $P_LINK, $notify_message);
         $notify_message = preg_replace("/\bP_LINK_COMMENT\b/u", $P_LINK_COMMENT, $notify_message);
@@ -651,6 +654,7 @@ if(!function_exists('wp_notify_postauthor')) :
         $notify_message = preg_replace("/\bP_CATEGORY\b/u", $P_CATEGORY, $notify_message);
 
         $subject = preg_replace("/\bP_ID\b/u", $P_ID, $subject);
+        $subject = preg_replace("/\bP_AUTHOR\b/u", $P_AUTHOR, $subject);
         $subject = preg_replace("/\bP_TITLE\b/u", $P_TITLE, $subject);
         $subject = preg_replace("/\bP_LINK\b/u", $P_LINK, $subject);
         $subject = preg_replace("/\bP_LINK_COMMENT\b/u", $P_LINK_COMMENT, $subject);
@@ -775,6 +779,7 @@ if(!function_exists('wp_notify_moderator')) :
         // Get the Post Variables
         $P_ID = $comment->comment_post_ID;
         $P_TITLE = $post->post_title;
+        $P_AUTHOR = $postAuthor->display_name;
         if($email_format === 'html') {
             $P_LINK = '<a href="'.get_permalink($P_ID).'">'.$P_TITLE.'</a>';
             $P_LINK_COMMENT = '<a href="'.get_permalink($P_ID).'#comment-'.$comment_id.'">'.$P_TITLE.'</a>';
@@ -845,6 +850,7 @@ if(!function_exists('wp_notify_moderator')) :
 
         //REPLACE VARIABLES
         $notify_message = preg_replace("/\bP_ID\b/u", $P_ID, $notify_message);
+        $notify_message = preg_replace("/\bP_AUTHOR\b/u", $P_AUTHOR, $notify_message);
         $notify_message = preg_replace("/\bP_TITLE\b/u", $P_TITLE, $notify_message);
         $notify_message = preg_replace("/\bP_LINK\b/u", $P_LINK, $notify_message);
         $notify_message = preg_replace("/\bP_LINK_COMMENT\b/u", $P_LINK_COMMENT, $notify_message);
@@ -867,6 +873,7 @@ if(!function_exists('wp_notify_moderator')) :
         $notify_message = preg_replace("/\bP_CATEGORY\b/u", $P_CATEGORY, $notify_message);
 
         $subject = preg_replace("/\bP_ID\b/u", $P_ID, $subject);
+        $subject = preg_replace("/\bP_AUTHOR\b/u", $P_AUTHOR, $subject);
         $subject = preg_replace("/\bP_TITLE\b/u", $P_TITLE, $subject);
         $subject = preg_replace("/\bP_LINK\b/u", $P_LINK, $subject);
         $subject = preg_replace("/\bP_LINK_COMMENT\b/u", $P_LINK_COMMENT, $subject);

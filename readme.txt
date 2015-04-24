@@ -3,7 +3,7 @@ Contributors: scweber
 Tags: comment, notifications, author, moderator, e-mail
 Requires at least: 3.0
 Tested up to: 4.1.2
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,6 @@ for you moderators.
   * Post Link
   * Post Link to Specific Comment
   * Post Link to Comments Section
-  * Post Category (only the first category assigned to post)
 
 * **Comment Variables**
   * Comment Author Name
@@ -32,7 +31,6 @@ for you moderators.
   * Comment Author URL
   * Comment Author ARIN Lookup
   * Comment Content
-  * Comment Excerpt
   * Comments Awaiting Moderation (Moderator Templates Only)
 
 * **Moderation Variables**
@@ -46,7 +44,10 @@ for you moderators.
   * Blog Name
 
 = Planned Updates =
-* There are currently no planned updates. If you would like to see some additional features or variables please create a support ticket and add "Feature Request" to the subject line.
+* I plan on adding the following features shortly
+  * Ability to specify additional recipients of the e-mails on a per template basis
+    * This will allow for only the administrators to receive the moderation e-mails.  Or if you have multiple moderators, it will allow each moderator to receive an e-mail
+    * The additional users will be required to have an account on your site
 
 == Frequently Asked Questions ==
 **I have Custom Comment Notifications installed, now what?**  
@@ -71,6 +72,10 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
 3. Set up and customize the plugin through the 'Settings' Menu
 
 == Changelog ==
+= 1.0.6 = 
+* **Enhancements**
+  * Post Author variable added that will show the display name of the Post Author
+
 = 1.0.5 =
 * **Enhancements**
   * Category variable added that will show the first category assigned to a post.
