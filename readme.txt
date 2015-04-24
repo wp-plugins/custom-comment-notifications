@@ -18,6 +18,7 @@ for you moderators.
 = Available Variables =
 * **Post Variables**
   * Post ID
+  * Post Author
   * Post Title
   * Post Link
   * Post Link to Specific Comment
