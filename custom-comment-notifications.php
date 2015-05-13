@@ -2,14 +2,14 @@
 /**
  *
  * @package Custom_Comment_Notifications
- * @version 1.0.7
+ * @version 1.0.8
  */
 /*
   Plugin Name: Custom Comment Notifications
   Plugin URI: https://github.com/scweber/custom-comment-notifications
   Description: This plugin allows for the comment e-mail notifications that are sent to the comment moderator as well as the post author to be completely customized.
   Author: Scott Weber
-  Version: 1.0.7
+  Version: 1.0.8
   Author URI: https://github.com/scweber
  */
 
@@ -233,62 +233,62 @@ function ccn_settings_menu() {
             <table id="ccn-editor-table">
                 <tr valign="top"><th><?php _e('Subject:', 'custom-comment-notifications'); ?></th><td><input type="text" id="ccn-editor-subject" size="90"></input></td></tr>
                 <tr valign="top"><th><?php _e('Content:', 'custom-comment-notifications'); ?></th><td><textarea rows="20" cols="90" id="ccn-editor-content"></textarea></td></tr>
+                                </table>
+                            </div>
+                            <div id="ccn-save-container">
+                                <table id="ccn-save-table">
+                                    <tr valign="top"><td><input type="submit" name="ccn_save" class="button-primary" value="<?php _e('Save Changes', 'custom-comment-notifications'); ?>" /></td></tr>
+                                </table>     
+                            </div>
+                        </form>
+                        <div id="ccn-variables-container">
+                            <hr/><h3><?php _e('Post Variables', 'custom-comment-notifications'); ?></h3><hr/>
+                            <table id="ccn-post-variables-table" class="form-table">
+                                <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
+                                <tr><td id="ccn-variable"><?php _e('P_ID', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('ID of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('P_AUTHOR', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Author of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('P_TITLE', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Title of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('P_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('P_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('P_LINK_COMMENT', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to post that was commented on (navigate to current comment)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('P_LINK_COMMENTS', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to the post that was commented on (navigate to comments section)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('P_CATEGORY', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('First category assigned to the post', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
                             </table>
+                            <hr/><h3><?php _e('Comment Variables', 'custom-comment-notifications'); ?></h3><hr/>
+                            <table id="ccn-comment-variables-table" class="form-table">
+                                <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
+                                <tr><td id="ccn-variable"><?php _e('C_AUTHOR', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Name of comment author', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('C_AUTHOR_EMAIL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Email of comment author', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Mail Link', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('C_AUTHOR_IP', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('IP of comment author', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('C_AUTHOR_DOMAIN', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Domain lookup of comment author\'s IP', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('C_AUTHOR_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL of comment author', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('C_AUTHOR_ARIN_LOOKUP', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><a href="https://www.arin.net/"><?php _e('ARIN Whois', 'custom-comment-notifications'); ?></a><?php _e(' lookup of comment author\'s IP', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('C_CONTENT', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Content of the comment', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('C_EXCERPT', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Excerpt of the comment', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('C_WAITING_MODERATION', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Number of comments waiting moderation (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Integer', 'custom-comment-notifications'); ?></td></tr>
+                            </table>
+                            <hr/><h3><?php _e('Moderation Variables', 'custom-comment-notifications'); ?></h3><hr/>
+                            <table id="ccn-moderation-variables-table" class="form-table">
+                                <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
+                                <tr><td id="ccn-variable"><?php _e('DELETE_TRASH_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to trash or delete Comment (depends on ', 'custom-comment-notifications'); ?><a href=https://codex.wordpress.org/Trash_status><?php _e('EMPTY_TRASH_DAYS', 'custom-comment-notifications'); ?></a><?php _e(' variable)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('APPROVE_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to approve comment (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('SPAM_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to mark comment as spam', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('MODERATION_PANEL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to Moderation Panel (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                 <tr><td id="ccn-variable"><?php _e('DELETE_TRASH_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to trash or delete Comment (depends on ', 'custom-comment-notifications'); ?><a href=https://codex.wordpress.org/Trash_status><?php _e('EMPTY_TRASH_DAYS', 'custom-comment-notifications'); ?></a><?php _e(' variable)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('APPROVE_COMMENT_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to approve comment (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('SPAM_COMMENT_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to mark comment as spam', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('MODERATION_PANEL_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to Moderation Panel (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                            </table>
+                            <hr/><h3><?php _e('Site Variables', 'custom-comment-notifications'); ?></h3><hr/>
+                            <table id="ccn-moderation-variables-table" class="form-table">
+                                <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
+                                <tr><td id="ccn-variable"><?php _e('SITE_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to Site', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('SITE_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to Site', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                                <tr><td id="ccn-variable"><?php _e('BLOG_NAME', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Blog Name', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                            </table>
+                            <span><?php _e('**If Plain Text Email format selection is chosen, then anchor tags will be split out and the URL will immediately follow the corresponding text.', 'custom-comment-notifications'); ?></span>
                         </div>
-                        <div id="ccn-save-container">
-                            <table id="ccn-save-table">
-                                <tr valign="top"><td><input type="submit" name="ccn_save" class="button-primary" value="<?php _e('Save Changes', 'custom-comment-notifications'); ?>" /></td></tr>
-                            </table>     
-                        </div>
-                    </form>
-                    <div id="ccn-variables-container">
-                        <hr/><h3><?php _e('Post Variables', 'custom-comment-notifications'); ?></h3><hr/>
-                        <table id="ccn-post-variables-table" class="form-table">
-                            <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
-                            <tr><td id="ccn-variable"><?php _e('P_ID', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('ID of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('P_AUTHOR', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Author of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('P_TITLE', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Title of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('P_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('P_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('P_LINK_COMMENT', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to post that was commented on (navigate to current comment)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('P_LINK_COMMENTS', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to the post that was commented on (navigate to comments section)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('P_CATEGORY', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('First category assigned to the post', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                        </table>
-                        <hr/><h3><?php _e('Comment Variables', 'custom-comment-notifications'); ?></h3><hr/>
-                        <table id="ccn-comment-variables-table" class="form-table">
-                            <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
-                            <tr><td id="ccn-variable"><?php _e('C_AUTHOR', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Name of comment author', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('C_AUTHOR_EMAIL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Email of comment author', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Mail Link', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('C_AUTHOR_IP', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('IP of comment author', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('C_AUTHOR_DOMAIN', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Domain lookup of comment author\'s IP', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('C_AUTHOR_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL of comment author', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('C_AUTHOR_ARIN_LOOKUP', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><a href="https://www.arin.net/"><?php _e('ARIN Whois', 'custom-comment-notifications'); ?></a><?php _e(' lookup of comment author\'s IP', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('C_CONTENT', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Content of the comment', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('C_EXCERPT', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Excerpt of the comment', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('C_WAITING_MODERATION', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Number of comments waiting moderation (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Integer', 'custom-comment-notifications'); ?></td></tr>
-                        </table>
-                        <hr/><h3><?php _e('Moderation Variables', 'custom-comment-notifications'); ?></h3><hr/>
-                        <table id="ccn-moderation-variables-table" class="form-table">
-                            <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
-                            <tr><td id="ccn-variable"><?php _e('DELETE_TRASH_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to trash or delete Comment (depends on ', 'custom-comment-notifications'); ?><a href=https://codex.wordpress.org/Trash_status><?php _e('EMPTY_TRASH_DAYS', 'custom-comment-notifications'); ?></a><?php _e(' variable)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('APPROVE_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to approve comment (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('SPAM_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to mark comment as spam', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('MODERATION_PANEL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to Moderation Panel (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                             <tr><td id="ccn-variable"><?php _e('DELETE_TRASH_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to trash or delete Comment (depends on ', 'custom-comment-notifications'); ?><a href=https://codex.wordpress.org/Trash_status><?php _e('EMPTY_TRASH_DAYS', 'custom-comment-notifications'); ?></a><?php _e(' variable)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('APPROVE_COMMENT_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to approve comment (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('SPAM_COMMENT_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to mark comment as spam', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('MODERATION_PANEL_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to Moderation Panel (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                        </table>
-                        <hr/><h3><?php _e('Site Variables', 'custom-comment-notifications'); ?></h3><hr/>
-                        <table id="ccn-moderation-variables-table" class="form-table">
-                            <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
-                            <tr><td id="ccn-variable"><?php _e('SITE_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to Site', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('SITE_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to Site', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                            <tr><td id="ccn-variable"><?php _e('BLOG_NAME', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Blog Name', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
-                        </table>
-                        <span><?php _e('**If Plain Text Email format selection is chosen, then anchor tags will be split out and the URL will immediately follow the corresponding text.', 'custom-comment-notifications'); ?></span>
-                    </div>
-                    
+                        
     <?php
 }
 
@@ -451,7 +451,7 @@ function ccn_update_editor_subject_callback() {
 
 function ccn_javascript() {
     ?>
-                    <script type='text/javascript'>
+                        <script type='text/javascript'>
         jQuery(document).ready(function ($) {
             $('#ccn-template').change(function () {
                 var template = $('#ccn-template').val();
@@ -769,10 +769,10 @@ if(!function_exists('wp_notify_moderator')) :
         $post = get_post($comment->comment_post_ID);
         $postAuthor = get_userdata($post->post_author);
 
-        // Send to the administration and to the post author if the author can modify the comment.
+        // Send to the administration and to the post author if the author can modify the comment.   
         $recipients = array(get_option('admin_email'));
-        $custom_recipients = split(', ', $moderator_recipients);
-        $recipients = array_map('trim', explode(',', $custom_recipients));
+        $custom_recipients = array_map('trim', explode(',', $moderator_recipients));
+        $recipients = array_merge($recipients, $custom_recipients);
         if($allow_author_moderation && user_can($postAuthor->ID, 'edit_comment', $comment_id) && !empty($postAuthor->user_email)) {
             if(0 !== strcasecmp($postAuthor->user_email, get_option('admin_email'))) {
                 $recipients[] = $postAuthor->user_email;

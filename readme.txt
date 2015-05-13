@@ -3,7 +3,7 @@ Contributors: scweber
 Tags: comment, notifications, author, moderator, e-mail
 Requires at least: 3.0
 Tested up to: 4.2.2
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,9 +18,9 @@ for you moderators.
 = Available Variables =
 * **Post Variables**
   * Post ID
-  * Post Author
   * Post Title
   * Post Link
+  * Post Link URL
   * Post Link to Specific Comment
   * Post Link to Comments Section
 
@@ -36,12 +36,17 @@ for you moderators.
 
 * **Moderation Variables**
   * Delete/Trash Comment (Depends on EMPTY_TRASH_DAYS variable)
+  * Delete/Trash Comment URL (Depends on EMPTY_TRASH_DAYS variable)
   * Approve Comment (Moderator Templates Only)
+  * Approve Comment URL (Moderator Templates Only)
   * Spam Comment
+  * Spam Comment URL 
   * Moderation Panel Link (Moderator Templates Only)
+  * Moderation Panel Link URL (Moderator Templates Only)
 
 * **Site Variables**
   * Site Link
+  * Site Link URL
   * Blog Name
 
 = Planned Updates =
@@ -73,9 +78,14 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
 3. Set up and customize the plugin through the 'Settings' Menu
 
 == Changelog ==
+= 1.0.8 =
+* **Bug Fixes**
+  * An error when building the recipient lists for moderation emails (thanks WSP-webmaster)
+
 = 1.0.7 =
 * **Enhancements**
   * URLs added as additional variables to the Links
+
 
 = 1.0.6 = 
 * **Enhancements**
@@ -89,7 +99,7 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
   * Ability to protect the comment author's information in the moderation email. This functionality already existed for the author email.
 
 = 1.0.4 =
-* **Enhancments**
+* **Enhancements**
   * Allow Post Author to be excluded from or included in moderation e-mails.
 
 = 1.0.3 =
