@@ -18,9 +18,9 @@ for you moderators.
 = Available Variables =
 * **Post Variables**
   * Post ID
-  * Post Author
   * Post Title
   * Post Link
+  * Post Link URL
   * Post Link to Specific Comment
   * Post Link to Comments Section
 
@@ -36,12 +36,17 @@ for you moderators.
 
 * **Moderation Variables**
   * Delete/Trash Comment (Depends on EMPTY_TRASH_DAYS variable)
+  * Delete/Trash Comment URL (Depends on EMPTY_TRASH_DAYS variable)
   * Approve Comment (Moderator Templates Only)
+  * Approve Comment URL (Moderator Templates Only)
   * Spam Comment
+  * Spam Comment URL 
   * Moderation Panel Link (Moderator Templates Only)
+  * Moderation Panel Link URL (Moderator Templates Only)
 
 * **Site Variables**
   * Site Link
+  * Site Link URL
   * Blog Name
 
 = Planned Updates =
@@ -77,6 +82,7 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
 * **Enhancements**
   * URLs added as additional variables to the Links
 
+
 = 1.0.6 = 
 * **Enhancements**
   * Post Author variable added that will show the display name of the Post Author
@@ -89,7 +95,7 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
   * Ability to protect the comment author's information in the moderation email. This functionality already existed for the author email.
 
 = 1.0.4 =
-* **Enhancments**
+* **Enhancements**
   * Allow Post Author to be excluded from or included in moderation e-mails.
 
 = 1.0.3 =
