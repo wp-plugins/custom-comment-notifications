@@ -3,7 +3,7 @@ Contributors: scweber
 Tags: comment, notifications, author, moderator, e-mail
 Requires at least: 3.0
 Tested up to: 4.2.2
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,10 @@ Activate the plugin.  It doesn't matter if you choose to network activate or act
 3. Set up and customize the plugin through the 'Settings' Menu
 
 == Changelog ==
+= 1.0.7 =
+* **Enhancements**
+  * URLs added as additional variables to the Links
+
 = 1.0.6 = 
 * **Enhancements**
   * Post Author variable added that will show the display name of the Post Author

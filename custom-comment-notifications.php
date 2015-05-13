@@ -2,14 +2,14 @@
 /**
  *
  * @package Custom_Comment_Notifications
- * @version 1.0.6
+ * @version 1.0.7
  */
 /*
   Plugin Name: Custom Comment Notifications
   Plugin URI: https://github.com/scweber/custom-comment-notifications
   Description: This plugin allows for the comment e-mail notifications that are sent to the comment moderator as well as the post author to be completely customized.
   Author: Scott Weber
-  Version: 1.0.6
+  Version: 1.0.7
   Author URI: https://github.com/scweber
  */
 
@@ -249,6 +249,7 @@ function ccn_settings_menu() {
                             <tr><td id="ccn-variable"><?php _e('P_AUTHOR', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Author of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('P_TITLE', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Title of post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('P_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                            <tr><td id="ccn-variable"><?php _e('P_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to post that was commented on', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('P_LINK_COMMENT', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to post that was commented on (navigate to current comment)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('P_LINK_COMMENTS', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to the post that was commented on (navigate to comments section)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('P_CATEGORY', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('First category assigned to the post', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
@@ -273,11 +274,16 @@ function ccn_settings_menu() {
                             <tr><td id="ccn-variable"><?php _e('APPROVE_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to approve comment (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('SPAM_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to mark comment as spam', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('MODERATION_PANEL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to Moderation Panel (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                             <tr><td id="ccn-variable"><?php _e('DELETE_TRASH_COMMENT_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to trash or delete Comment (depends on ', 'custom-comment-notifications'); ?><a href=https://codex.wordpress.org/Trash_status><?php _e('EMPTY_TRASH_DAYS', 'custom-comment-notifications'); ?></a><?php _e(' variable)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                            <tr><td id="ccn-variable"><?php _e('APPROVE_COMMENT_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to approve comment (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                            <tr><td id="ccn-variable"><?php _e('SPAM_COMMENT_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to mark comment as spam', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
+                            <tr><td id="ccn-variable"><?php _e('MODERATION_PANEL_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('URL to Moderation Panel (only valid on Moderator Template)', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
                         </table>
                         <hr/><h3><?php _e('Site Variables', 'custom-comment-notifications'); ?></h3><hr/>
                         <table id="ccn-moderation-variables-table" class="form-table">
                             <thead><tr><th><?php _e('Variable', 'custom-comment-notifications'); ?></th><th><?php _e('Description', 'custom-comment-notifications'); ?></th><th><?php _e('Type', 'custom-comment-notifications'); ?></th></tr></thead>
                             <tr><td id="ccn-variable"><?php _e('SITE_LINK', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to Site', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Anchor', 'custom-comment-notifications'); ?></td></tr>
+                            <tr><td id="ccn-variable"><?php _e('SITE_LINK_URL', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Link to Site', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
                             <tr><td id="ccn-variable"><?php _e('BLOG_NAME', 'custom-comment-notifications'); ?></td><td id="ccn-variable-description"><?php _e('Blog Name', 'custom-comment-notifications'); ?></td><td id="ccn-variable-type"><?php _e('Text', 'custom-comment-notifications'); ?></td></tr>
                         </table>
                         <span><?php _e('**If Plain Text Email format selection is chosen, then anchor tags will be split out and the URL will immediately follow the corresponding text.', 'custom-comment-notifications'); ?></span>
@@ -561,10 +567,12 @@ if(!function_exists('wp_notify_postauthor')) :
         $P_AUTHOR = $postAuthor->display_name;
         if($email_format === 'html') {
             $P_LINK = '<a href="'.get_permalink($P_ID).'">'.$P_TITLE.'</a>';
+            $P_LINK_URL = get_permalink($P_ID);
             $P_LINK_COMMENT = '<a href="'.get_permalink($P_ID).'#comment-'.$comment_id.'">'.$P_TITLE.'</a>';
             $P_LINK_COMMENTS = '<a href="'.get_permalink($P_ID).'#comments">'.$P_TITLE.'</a>';
         } else {
             $P_LINK = $P_TITLE.' - '.get_permalink($P_ID);
+            $P_LINK_URL = get_permalink($P_ID);
             $P_LINK_COMMENT = $P_TITLE.' - '.get_permalink($P_ID).'#comment-'.$comment_id;
             $P_LINK_COMMENTS = $P_TITLE.' - '.get_permalink($P_ID).'#comments';
         }
@@ -600,17 +608,23 @@ if(!function_exists('wp_notify_postauthor')) :
         // Get the Moderation Variables    
         if($email_format == 'html') {
             $SPAM_COMMENT_LINK = '<a href="'.admin_url('comment.php?action=spam&c='.$comment_id).'">Spam It</a>';
+            $SPAM_COMMENT_LINK_URL = admin_url('comment.php?action=spam&c='.$comment_id);
             if(EMPTY_TRASH_DAYS) {
                 $DELETE_TRASH_COMMENT_LINK = '<a href="'.admin_url('comment.php?action=trash&c='.$comment_id).'">Trash It</a>';
+                $DELETE_TRASH_COMMENT_LINK_URL = admin_url('comment.php?action=trash&c='.$comment_id);
             } else {
                 $DELETE_TRASH_COMMENT_LINK = '<a href="'.admin_url('comment.php?action=delete&c='.$comment_id).'">Delete It</a>';
+                $DELETE_TRASH_COMMENT_LINK_URL = admin_url('comment.php?action=delete&c='.$comment_id);
             }
         } else {
             $SPAM_COMMENT_LINK = 'Spam It - '.admin_url('comment.php?action=spam&c='.$comment_id);
+            $SPAM_COMMENT_LINK_URL = admin_url('comment.php?action=spam&c='.$comment_id);
             if(EMPTY_TRASH_DAYS) {
                 $DELETE_TRASH_COMMENT_LINK = 'Trash It - '.admin_url('comment.php?action=trash&c='.$comment_id);
+                $DELETE_TRASH_COMMENT_LINK_URL = admin_url('comment.php?action=trash&c='.$comment_id);
             } else {
                 $DELETE_TRASH_COMMENT_LINK = 'Delete It - '.admin_url('comment.php?action=delete&c='.$comment_id);
+                $DELETE_TRASH_COMMENT_LINK_URL = admin_url('comment.php?action=delete&c='.$comment_id);
             }
         }
 
@@ -622,10 +636,12 @@ if(!function_exists('wp_notify_postauthor')) :
         // Get the Site Variables
         if($email_format == 'html') {
             $BLOG_NAME = get_option('blogname');
-            $SITE_LINK = get_option('siteurl');
+            $SITE_LINK = '<a href="'.get_option('siteurl').'">Site</a>';
+            $SITE_LINK_URL = get_option('siteurl');
         } else {
             $BLOG_NAME = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
             $SITE_LINK = get_option('siteurl');
+            $SITE_LINK_URL = get_option('siteurl');
         }
 
         // Get the First Post Category
@@ -637,6 +653,7 @@ if(!function_exists('wp_notify_postauthor')) :
         $notify_message = preg_replace("/\bP_AUTHOR\b/u", $P_AUTHOR, $notify_message);
         $notify_message = preg_replace("/\bP_TITLE\b/u", $P_TITLE, $notify_message);
         $notify_message = preg_replace("/\bP_LINK\b/u", $P_LINK, $notify_message);
+        $notify_message = preg_replace("/\bP_LINK_URL\b/u", $P_LINK_URL, $notify_message);
         $notify_message = preg_replace("/\bP_LINK_COMMENT\b/u", $P_LINK_COMMENT, $notify_message);
         $notify_message = preg_replace("/\bP_LINK_COMMENTS\b/u", $P_LINK_COMMENTS, $notify_message);
         $notify_message = preg_replace("/\bC_AUTHOR\b/u", $C_AUTHOR, $notify_message);
@@ -650,6 +667,9 @@ if(!function_exists('wp_notify_postauthor')) :
         $notify_message = preg_replace("/\bDELETE_TRASH_COMMENT_LINK\b/u", $DELETE_TRASH_COMMENT_LINK, $notify_message);
         $notify_message = preg_replace("/\bSPAM_COMMENT_LINK\b/u", $SPAM_COMMENT_LINK, $notify_message);
         $notify_message = preg_replace("/\bSITE_LINK\b/u", $SITE_LINK, $notify_message);
+        $notify_message = preg_replace("/\bDELETE_TRASH_COMMENT_LINK_URL\b/u", $DELETE_TRASH_COMMENT_LINK_URL, $notify_message);
+        $notify_message = preg_replace("/\bSPAM_COMMENT_LINK_URL\b/u", $SPAM_COMMENT_LINK_URL, $notify_message);
+        $notify_message = preg_replace("/\bSITE_LINK_URL\b/u", $SITE_LINK_URL, $notify_message);
         $notify_message = preg_replace("/\bBLOG_NAME\b/u", $BLOG_NAME, $notify_message);
         $notify_message = preg_replace("/\bP_CATEGORY\b/u", $P_CATEGORY, $notify_message);
 
@@ -657,6 +677,7 @@ if(!function_exists('wp_notify_postauthor')) :
         $subject = preg_replace("/\bP_AUTHOR\b/u", $P_AUTHOR, $subject);
         $subject = preg_replace("/\bP_TITLE\b/u", $P_TITLE, $subject);
         $subject = preg_replace("/\bP_LINK\b/u", $P_LINK, $subject);
+        $subject = preg_replace("/\bP_LINK_URL\b/u", $P_LINK_URL, $subject);
         $subject = preg_replace("/\bP_LINK_COMMENT\b/u", $P_LINK_COMMENT, $subject);
         $subject = preg_replace("/\bP_LINK_COMMENTS\b/u", $P_LINK_COMMENTS, $subject);
         $subject = preg_replace("/\bC_AUTHOR\b/u", $C_AUTHOR, $subject);
@@ -670,6 +691,9 @@ if(!function_exists('wp_notify_postauthor')) :
         $subject = preg_replace("/\bDELETE_TRASH_COMMENT_LINK\b/u", $DELETE_TRASH_COMMENT_LINK, $subject);
         $subject = preg_replace("/\bSPAM_COMMENT_LINK\b/u", $SPAM_COMMENT_LINK, $subject);
         $subject = preg_replace("/\bSITE_LINK\b/u", $SITE_LINK, $subject);
+        $subject = preg_replace("/\bDELETE_TRASH_COMMENT_LINK_URL\b/u", $DELETE_TRASH_COMMENT_LINK_URL, $subject);
+        $subject = preg_replace("/\bSPAM_COMMENT_LINK_URL\b/u", $SPAM_COMMENT_LINK_URL, $subject);
+        $subject = preg_replace("/\bSITE_LINK_URL\b/u", $SITE_LINK_URL, $subject);
         $subject = preg_replace("/\bBLOG_NAME\b/u", $BLOG_NAME, $subject);
         $subject = preg_replace("/\bP_CATEGORY\b/u", $P_CATEGORY, $subject);
 
@@ -782,10 +806,12 @@ if(!function_exists('wp_notify_moderator')) :
         $P_AUTHOR = $postAuthor->display_name;
         if($email_format === 'html') {
             $P_LINK = '<a href="'.get_permalink($P_ID).'">'.$P_TITLE.'</a>';
+            $P_LINK_URL = get_permalink($P_ID);
             $P_LINK_COMMENT = '<a href="'.get_permalink($P_ID).'#comment-'.$comment_id.'">'.$P_TITLE.'</a>';
             $P_LINK_COMMENTS = '<a href="'.get_permalink($P_ID).'#comments">'.$P_TITLE.'</a>';
         } else {
             $P_LINK = $P_TITLE.' - '.get_permalink($P_ID);
+            $P_LINK_URL = get_permalink($P_ID);
             $P_LINK_COMMENT = $P_TITLE.' - '.get_permalink($P_ID).'#comment-'.$comment_id;
             $P_LINK_COMMENTS = $P_TITLE.' - '.get_permalink($P_ID).'#comments';
         }
@@ -811,21 +837,31 @@ if(!function_exists('wp_notify_moderator')) :
         // Get the Moderation Variables    
         if($email_format == 'html') {
             $SPAM_COMMENT_LINK = '<a href="'.admin_url('comment.php?action=spam&c='.$comment_id).'">Spam It</a>';
+            $SPAM_COMMENT_LINK_URL = admin_url('comment.php?action=spam&c='.$comment_id);
             $APPROVE_COMMENT_LINK = '<a href="'.admin_url('comment.php?action=approve&c='.$comment_id).'">Approve It</a>';
+            $APPROVE_COMMENT_LINK_URL = admin_url('comment.php?action=approve&c='.$comment_id);
             $MODERATION_PANEL = '<a href="'.admin_url('edit-comments.php?comment_status=moderated').'">Moderation Panel</a>';
+            $MODERATION_PANEL_URL = admin_url('edit-comments.php?comment_status=moderated');
             if(EMPTY_TRASH_DAYS) {
                 $DELETE_TRASH_COMMENT_LINK = '<a href="'.admin_url('comment.php?action=trash&c='.$comment_id).'">Trash It</a>';
+                $DELETE_TRASH_COMMENT_LINK_URL = admin_url('comment.php?action=trash&c='.$comment_id);
             } else {
                 $DELETE_TRASH_COMMENT_LINK = '<a href="'.admin_url('comment.php?action=delete&c='.$comment_id).'">Delete It</a>';
+                $DELETE_TRASH_COMMENT_LINK_URL = admin_url('comment.php?action=delete&c='.$comment_id);
             }
         } else {
             $SPAM_COMMENT_LINK = 'Spam It - '.admin_url('comment.php?action=spam&c='.$comment_id);
+            $SPAM_COMMENT_LINK_URL = admin_url('comment.php?action=spam&c='.$comment_id);
             $APPROVE_COMMENT_LINK = 'Approve It - '.admin_url('comment.php?action=approve&c='.$comment_id);
+            $APPROVE_COMMENT_LINK_URL = admin_url('comment.php?action=approve&c='.$comment_id);
             $MODERATION_PANEL = 'Moderation Panel - '.admin_url('edit-comments.php?comment_status=moderated');
+            $MODERATION_PANEL_URL = admin_url('edit-comments.php?comment_status=moderated');
             if(EMPTY_TRASH_DAYS) {
                 $DELETE_TRASH_COMMENT_LINK = 'Trash It - '.admin_url('comment.php?action=trash&c='.$comment_id);
+                $DELETE_TRASH_COMMENT_LINK_URL = admin_url('comment.php?action=trash&c='.$comment_id);
             } else {
                 $DELETE_TRASH_COMMENT_LINK = 'Delete It - '.admin_url('comment.php?action=delete&c='.$comment_id);
+                $DELETE_TRASH_COMMENT_LINK_URL = admin_url('comment.php?action=delete&c='.$comment_id);
             }
         }
 
@@ -839,9 +875,11 @@ if(!function_exists('wp_notify_moderator')) :
         if($email_format == 'html') {
             $BLOG_NAME = get_option('blogname');
             $SITE_LINK = get_option('siteurl');
+            $SITE_LINK_URL = get_option('siteurl');
         } else {
             $BLOG_NAME = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
             $SITE_LINK = get_option('siteurl');
+            $SITE_LINK_URL = get_option('siteurl');
         }
 
         // Get the First Post Category
@@ -853,6 +891,7 @@ if(!function_exists('wp_notify_moderator')) :
         $notify_message = preg_replace("/\bP_AUTHOR\b/u", $P_AUTHOR, $notify_message);
         $notify_message = preg_replace("/\bP_TITLE\b/u", $P_TITLE, $notify_message);
         $notify_message = preg_replace("/\bP_LINK\b/u", $P_LINK, $notify_message);
+        $notify_message = preg_replace("/\bP_LINK_URL\b/u", $P_LINK_URL, $notify_message);
         $notify_message = preg_replace("/\bP_LINK_COMMENT\b/u", $P_LINK_COMMENT, $notify_message);
         $notify_message = preg_replace("/\bP_LINK_COMMENTS\b/u", $P_LINK_COMMENTS, $notify_message);
         $notify_message = preg_replace("/\bC_AUTHOR\b/u", $C_AUTHOR, $notify_message);
@@ -869,6 +908,11 @@ if(!function_exists('wp_notify_moderator')) :
         $notify_message = preg_replace("/\bAPPROVE_COMMENT_LINK\b/u", $APPROVE_COMMENT_LINK, $notify_message);
         $notify_message = preg_replace("/\bMODERATION_PANEL\b/u", $MODERATION_PANEL, $notify_message);
         $notify_message = preg_replace("/\bSITE_LINK\b/u", $SITE_LINK, $notify_message);
+        $notify_message = preg_replace("/\bDELETE_TRASH_COMMENT_LINK_URL\b/u", $DELETE_TRASH_COMMENT_LINK_URL, $notify_message);
+        $notify_message = preg_replace("/\bSPAM_COMMENT_LINK_URL\b/u", $SPAM_COMMENT_LINK_URL, $notify_message);
+        $notify_message = preg_replace("/\bAPPROVE_COMMENT_LINK_URL\b/u", $APPROVE_COMMENT_LINK_URL, $notify_message);
+        $notify_message = preg_replace("/\bMODERATION_PANEL_URL\b/u", $MODERATION_PANEL_URL, $notify_message);
+        $notify_message = preg_replace("/\bSITE_LINK_URL\b/u", $SITE_LINK_URL, $notify_message);
         $notify_message = preg_replace("/\bBLOG_NAME\b/u", $BLOG_NAME, $notify_message);
         $notify_message = preg_replace("/\bP_CATEGORY\b/u", $P_CATEGORY, $notify_message);
 
@@ -876,6 +920,7 @@ if(!function_exists('wp_notify_moderator')) :
         $subject = preg_replace("/\bP_AUTHOR\b/u", $P_AUTHOR, $subject);
         $subject = preg_replace("/\bP_TITLE\b/u", $P_TITLE, $subject);
         $subject = preg_replace("/\bP_LINK\b/u", $P_LINK, $subject);
+        $subject = preg_replace("/\bP_LINK_URL\b/u", $P_LINK_URL, $subject);
         $subject = preg_replace("/\bP_LINK_COMMENT\b/u", $P_LINK_COMMENT, $subject);
         $subject = preg_replace("/\bP_LINK_COMMENTS\b/u", $P_LINK_COMMENTS, $subject);
         $subject = preg_replace("/\bC_AUTHOR\b/u", $C_AUTHOR, $subject);
@@ -892,6 +937,11 @@ if(!function_exists('wp_notify_moderator')) :
         $subject = preg_replace("/\bAPPROVE_COMMENT_LINK\b/u", $APPROVE_COMMENT_LINK, $subject);
         $subject = preg_replace("/\bMODERATION_PANEL\b/u", $MODERATION_PANEL, $subject);
         $subject = preg_replace("/\bSITE_LINK\b/u", $SITE_LINK, $subject);
+        $subject = preg_replace("/\bDELETE_TRASH_COMMENT_LINK_URL\b/u", $DELETE_TRASH_COMMENT_LINK_URL, $subject);
+        $subject = preg_replace("/\bSPAM_COMMENT_LINK_URL\b/u", $SPAM_COMMENT_LINK_URL, $subject);
+        $subject = preg_replace("/\bAPPROVE_COMMENT_LINK_URL\b/u", $APPROVE_COMMENT_LINK_URL, $subject);
+        $subject = preg_replace("/\bMODERATION_PANEL_URL\b/u", $MODERATION_PANEL_URL, $subject);
+        $subject = preg_replace("/\bSITE_LINK_URL\b/u", $SITE_LINK_URL, $subject);
         $subject = preg_replace("/\bBLOG_NAME\b/u", $BLOG_NAME, $subject);
         $subject = preg_replace("/\bP_CATEGORY\b/u", $P_CATEGORY, $subject);
 
